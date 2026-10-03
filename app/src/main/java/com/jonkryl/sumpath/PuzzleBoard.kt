@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import android.widget.TextView
 import com.jonkryl.sumpath.core.Puzzle
 import kotlin.math.min
 
-/** Equal square touch targets; text fits inside each cell even on API 24 at 200% font size. */
+/** Equal square touch targets; labels fit using the platform's actual font scaling and layout. */
 class PuzzleBoard(context: Context) : ViewGroup(context) {
     private var puzzle: Puzzle? = null
     private var path: List<Int> = emptyList()
@@ -140,13 +141,9 @@ class PuzzleBoard(context: Context) : ViewGroup(context) {
             val h = MeasureSpec.getSize(heightMeasureSpec)
             setMeasuredDimension(w, h)
             val textWidth = w - dp(8)
-            number.measure(MeasureSpec.makeMeasureSpec(textWidth, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec((h * .51f).toInt(), MeasureSpec.EXACTLY))
-            marker.measure(MeasureSpec.makeMeasureSpec(textWidth, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec((h * .24f).toInt(), MeasureSpec.EXACTLY))
-            step.measure(MeasureSpec.makeMeasureSpec((w * .30f).toInt(), MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec((h * .21f).toInt(), MeasureSpec.EXACTLY))
-            fit(number, 24f); fit(marker, 11f); fit(step, 9f)
+            fitAndMeasure(number, 24f, textWidth, (h * .51f).toInt())
+            fitAndMeasure(marker, 11f, textWidth, (h * .24f).toInt())
+            fitAndMeasure(step, 9f, (w * .30f).toInt(), (h * .21f).toInt())
         }
         override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
             val x = dp(4)
@@ -155,17 +152,23 @@ class PuzzleBoard(context: Context) : ViewGroup(context) {
             marker.layout(x, height - marker.measuredHeight - dp(3), width - x, height - dp(3))
             step.layout(width - step.measuredWidth - dp(3), dp(2), width - dp(3), dp(2) + step.measuredHeight)
         }
-        private fun fit(view: TextView, max: Float) {
-            val paint = Paint(view.paint)
+        private fun fitAndMeasure(view: TextView, max: Float, width: Int, height: Int) {
+            val widthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY)
+            val heightSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
             var size = max
-            val scale = resources.displayMetrics.scaledDensity
-            while (size > 6f) {
-                paint.textSize = size * scale
-                if (paint.measureText(view.text.toString()) <= view.measuredWidth - dp(2) &&
-                    paint.fontMetrics.descent - paint.fontMetrics.ascent <= view.measuredHeight) break
+            while (true) {
+                // Android 14+ scales SP nonlinearly. Measure the real TextView layout,
+                // including fallback glyphs and integer line-height rounding.
+                val pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+                    size, resources.displayMetrics)
+                view.setTextSize(TypedValue.COMPLEX_UNIT_PX, pixels)
+                view.measure(widthSpec, heightSpec)
+                val layout = view.layout
+                val fits = view.text.isEmpty() || (layout != null && layout.lineCount == 1 &&
+                    layout.getLineWidth(0) <= width - dp(2) && layout.getLineBottom(0) <= height)
+                if (fits || size <= 6f) break
                 size -= .5f
             }
-            view.textSize = size
         }
         private fun dp(value: Int) = (value * resources.displayMetrics.density + .5f).toInt()
     }
