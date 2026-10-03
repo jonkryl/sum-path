@@ -23,6 +23,10 @@ class LargeFontAccessibilityTest {
             scenario.onActivity { assertEquals(2.0f, it.resources.configuration.fontScale, .05f) }
             val state = awaitPuzzle(scenario)
             assertEquals(5, state.puzzle.size)
+            onView(withId(R.id.more_button)).check { view, error ->
+                if (error != null) throw error
+                assertButtonFits(view as TextView)
+            }
             onView(withId(PuzzleBoard.cellIds[12])).perform(scrollTo())
             onView(withId(R.id.board)).check { view, error ->
                 if (error != null) throw error
@@ -52,9 +56,25 @@ class LargeFontAccessibilityTest {
             onView(withId(R.id.undo_button)).perform(scrollTo()).check { view, error ->
                 if (error != null) throw error
                 assertTrue(view!!.height >= view.resources.displayMetrics.density * 48f)
+                assertButtonFits(view as TextView)
             }.perform(click())
             assertEquals(listOf(state.puzzle.start), awaitPuzzle(scenario).path)
+            onView(withId(R.id.restart_button)).perform(scrollTo()).check { view, error ->
+                if (error != null) throw error
+                assertButtonFits(view as TextView)
+            }
+            onView(withId(R.id.undo_button)).perform(scrollTo())
             saveScreenshot("07-large-font-actions-api-${Build.VERSION.SDK_INT}.png")
         }
+    }
+
+    private fun assertButtonFits(button: TextView) {
+        val layout = requireNotNull(button.layout)
+        val availableWidth = button.width - button.compoundPaddingLeft - button.compoundPaddingRight
+        val availableHeight = button.height - button.compoundPaddingTop - button.compoundPaddingBottom
+        for (line in 0 until layout.lineCount) {
+            assertTrue("Action label fits horizontally", layout.getLineWidth(line) <= availableWidth + 1f)
+        }
+        assertTrue("Action label fits vertically", layout.height <= availableHeight + 1)
     }
 }
