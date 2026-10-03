@@ -1,0 +1,3 @@
+Sum Path 1.0.0 is the first release of an original offline number-path puzzle. Orthogonal square boards, sums and required keys, 4×4 and 5×5 seeded challenges, a daily puzzle, guided tutorial, undo, restart and saved progress. Russian and English interface. Contextual Yandex ads are the default; an optional personalization choice does not disable advertising.
+
+The APK and Play AAB are signed with this app's persistent upload key. GitHub Actions verifies unit tests, Android lint, real API 24/36 journeys, signatures, package metadata and 16 KB native alignment. A GitHub release is a downloadable artifact, and does not confirm Google Play availability.

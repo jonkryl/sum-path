@@ -1,0 +1,14 @@
+<resources>
+    <item name="board" type="id"/><item name="sum_status" type="id"/><item name="keys_status" type="id"/>
+    <item name="message" type="id"/><item name="level_title" type="id"/><item name="progress" type="id"/>
+    <item name="undo_button" type="id"/><item name="restart_button" type="id"/><item name="next_button" type="id"/>
+    <item name="difficulty_button" type="id"/><item name="play_tab" type="id"/><item name="daily_tab" type="id"/>
+    <item name="learn_tab" type="id"/><item name="more_button" type="id"/><item name="ad_container" type="id"/>
+    <item name="cell_0" type="id"/><item name="cell_1" type="id"/><item name="cell_2" type="id"/><item name="cell_3" type="id"/>
+    <item name="cell_4" type="id"/><item name="cell_5" type="id"/><item name="cell_6" type="id"/><item name="cell_7" type="id"/>
+    <item name="cell_8" type="id"/><item name="cell_9" type="id"/><item name="cell_10" type="id"/><item name="cell_11" type="id"/>
+    <item name="cell_12" type="id"/><item name="cell_13" type="id"/><item name="cell_14" type="id"/><item name="cell_15" type="id"/>
+    <item name="cell_16" type="id"/><item name="cell_17" type="id"/><item name="cell_18" type="id"/><item name="cell_19" type="id"/>
+    <item name="cell_20" type="id"/><item name="cell_21" type="id"/><item name="cell_22" type="id"/><item name="cell_23" type="id"/>
+    <item name="cell_24" type="id"/>
+</resources>
