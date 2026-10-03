@@ -28,6 +28,7 @@ class LargeFontAccessibilityTest {
                 assertButtonFits(view as TextView)
             }
             onView(withId(PuzzleBoard.cellIds[12])).perform(scrollTo())
+            saveScreenshot("06-large-font-before-check-api-${Build.VERSION.SDK_INT}.png")
             onView(withId(R.id.board)).check { view, error ->
                 if (error != null) throw error
                 val board = view as ViewGroup
