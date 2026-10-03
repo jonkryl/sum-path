@@ -28,7 +28,7 @@
     <string name="remaining">Need %1$d more</string>
     <string name="over_target">%1$d above target</string>
     <string name="keys_value">Keys %1$d / %2$d</string>
-    <string name="progress_value">%1$d puzzles solved</string>
+    <string name="progress_value">Solved: %1$d</string>
     <string name="board_description">%1$d by %1$d puzzle. Tap a cell beside the current end of your path.</string>
     <string name="cell_description">Row %1$d, column %2$d, value %3$d%4$s</string>
     <string name="cell_start">, start</string>
@@ -44,7 +44,7 @@
     <string name="path_prompt">Tap an adjacent cell to extend your route.</string>
     <string name="path_dead_end">No unused neighbour. Undo a step and try another route.</string>
     <string name="wrong_finish_sum">At the finish, your sum must be exactly %1$d. Undo and try another route.</string>
-    <string name="wrong_finish_keys">The finish needs all %1$d keys. Undo and collect the missing keys.</string>
+    <string name="wrong_finish_keys">Collect every key (%1$d) before finishing. Undo and collect the missing keys.</string>
     <string name="won">Route complete!</string>
     <string name="won_body">Exact sum, all keys. Your solution is saved.</string>
     <string name="rejected_adjacent">Choose a cell directly beside the current end.</string>
