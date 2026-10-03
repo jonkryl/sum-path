@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -144,7 +145,8 @@ class MainActivity : Activity() {
         }
         addView(label, LinearLayout.LayoutParams(0, -2, 1f))
         addView(button("⋯", R.id.more_button, Color.WHITE, ink).apply {
-            textSize = 25f
+            // This glyph is an icon; its accessible text is the localized description.
+            setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25f)
             contentDescription = getString(R.string.more)
             setOnClickListener { showMore() }
         }, LinearLayout.LayoutParams(dp(56), dp(52)).apply { marginStart = dp(10) })
