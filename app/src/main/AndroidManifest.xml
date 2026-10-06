@@ -5,6 +5,7 @@
     <!-- Contextual advertising: the application deliberately does not request the advertising ID. -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
     <application
+        android:name=".AnalyticsApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

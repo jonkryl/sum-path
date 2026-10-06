@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ad_privacy_title">Ad privacy</string>
-    <string name="ad_privacy_message">Yandex contextual ads are the default. Your paths and progress stay on this device. The ad SDK may send technical data to serve ads. You can allow personalization or keep contextual ads; the banner stays in both modes. Location tracking and ad analytics are disabled. The app does not request advertising ID access.</string>
+    <string name="ad_privacy_message">Yandex contextual ads are the default. Your paths and progress stay on this device. The ad SDK may send technical data to serve ads. You can allow personalization or keep contextual ads; the banner stays in both modes. Location tracking and ad analytics are disabled. The app does not request advertising ID access. AppMetrica sends installation and session statistics, technical device and app information and an IP address to Yandex for usage analytics. The contents of your records are not sent. Location, advertising identifiers and crash reports are disabled in AppMetrica. These statistics operate independently of your advertising personalization choice.</string>
     <string name="ad_allow_personalization">Allow personalization</string>
     <string name="ad_contextual">Contextual ads</string>
     <string name="ad_policy">Privacy policy</string>
